@@ -42,3 +42,26 @@ $ ->
 
   console.log ppArray(@board)
 
+
+  boardFull= ->
+    for row in board
+      for cell in row
+        if cell == 0
+          return false
+    true
+
+   x= 0,  y=0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
