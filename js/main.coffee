@@ -43,7 +43,7 @@ $ ->
   console.log ppArray(@board)
 
 
-  boardFull= ->
+  boardFull= (board)->
     for row in board
       for cell in row
         if cell == 0
@@ -51,6 +51,32 @@ $ ->
     true
 
    x= 0,  y=0
+
+#boardFull= ->
+    #for row in board
+      #for cell in row
+        #if cell == 0
+          #return false
+    #true
+
+   #x= 0,  y=0
+
+   $('body').keydown(e) ->
+    console.log e.which
+    key=e.which
+      switch key
+        when 37 # left
+          console.log 'left'
+        when 38
+          console.log 'up'
+        when 39
+          console.log 'right'
+        when 40
+          console.log 'down'
+
+    generateTitle(@board)
+    generateTitle(@board)
+    ppArray(@board)
 
 
 
