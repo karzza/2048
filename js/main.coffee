@@ -3,7 +3,7 @@ $ ->
   ppArray = (array) ->
     for row in array
       console.log row
-  @board= [0.3].map (x) -> [0.3].map(y) ->0
+  @board = [0..3].map (x) -> [0..3].map (y) ->0
   ppArray(@board)
 
   array1 =[0..3]
@@ -14,29 +14,31 @@ $ ->
 
   array4= [0..3]
 
-masterArray = ->
-  x = array1 + array2 + array3 + array4
+  masterArray = ->
+    x = array1 + array2 + array3 + array4
 
-masterArray()
+  masterArray()
 
   board=[]
-    for x in [0..3]
-      board[x]= []
-      for y in [0..3]
-        board[x][y]=0
+  for x in [0..3]
+    board[x]= []
+    for y in [0..3]
+      board[x][y]=0
+
   ppArray board
 
-generateTitle= (board) ->
+  generateTitle= (board) ->
 
   randomIndex= (x) ->
-    Math.floor(Math.random() *4)
-      Math.floor(Math.random()* x)
+    Math.floor(Math.random()* x)
 
     for i in [0..1000]
       console.log randomIndex()
 
   randomValue = ->
     values =[2, 2, 2, 4]
-    val = values[randomIndex](values.length)* 3]
-    console.log values
+    val = values[randomIndex(values.length)* 3]
+    console.log randomValues
+
+  console.log ppArray(@board)
 
