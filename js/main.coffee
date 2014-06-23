@@ -28,6 +28,16 @@ $ ->
   ppArray board
 
   generateTitle= (board) ->
+    unless boardFull(board)
+      val= getRandomCell()
+      [x,y]=getRandomCell()
+        if board[x][y]=0
+          board[x][y]=val
+          else
+            generateTitle(board)
+          console.log generateTitle(@board)
+
+
 
   randomIndex= (x) ->
     Math.floor(Math.random()* x)
