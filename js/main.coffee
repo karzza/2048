@@ -35,7 +35,7 @@ $ ->
           board[x][y]=val
           else
             generateTitle(board)
-          console.log generateTitle(@board)
+          console.log generateTile(@board)
 
 
 
@@ -60,18 +60,15 @@ $ ->
           return false
     true
 
-   x = 0  y = 0
+  getColumn = (board, column) ->
+    # return an array
+    cells=[]
+    for row in [0.,3]
+      cells.push board[row][column]
+    cells # => [2,2,0,0]
 
-#boardFull= ->
-    #for row in board
-      #for cell in row
-        #if cell == 0
-          #return false
-    #true
 
-   #x= 0,  y=0
-
-   $('body').keydown(e) ->
+  $('body').keydown(e) ->
     console.log e.which
     key=e.which
     key= [37..40]
@@ -89,7 +86,6 @@ $ ->
         when 40
           console.log 'down'
 
-    generateTitle(@board)
     generateTitle(@board)
     ppArray(@board)
 
