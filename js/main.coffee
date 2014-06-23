@@ -50,7 +50,7 @@ $ ->
           return false
     true
 
-   x= 0,  y=0
+   x = 0  y = 0
 
 #boardFull= ->
     #for row in board
@@ -64,6 +64,11 @@ $ ->
    $('body').keydown(e) ->
     console.log e.which
     key=e.which
+    key= [37..40]
+
+    if $.inArray(key,keys)> -1
+      e.preventDefault()
+
       switch key
         when 37 # left
           console.log 'left'
