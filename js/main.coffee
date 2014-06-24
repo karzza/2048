@@ -91,15 +91,15 @@ $ ->
     generateTitle(@board)
     ppArray(@board)
 
-    merge = (arrayToMerge) ->
-    newArray = arrayToMerge
-    for value, index in array1
-        i =[0..3]
-        for [i] < in index
-            if value[i] == value[i+1]
-            value[i+1] = value[i+1] *2
-            value[i] = 0
-   newArray
+merge = (arrayToMerge) ->
+  newArray = arrayToMerge
+  for value, index in array1
+    i =[0..3]
+  for [i] < in index
+    if value[i] == value[i+1]
+      value[i+1] = value[i+1] *2
+      value[i] = 0
+  newArray
 
   console.log "mergeCells" + mergeCells([2,2,2,2], 'left')
   console.log "mergeCells" + mergeCells([2,2,2,2], 'right')
