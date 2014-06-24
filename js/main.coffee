@@ -67,12 +67,10 @@ $ ->
       cells.push board[row][column]
     cells # => [2,2,0,0]
 
-  getColumnV2 = (c, b) ->
-    [b[0][c],
-
-console.log "collapseCells"+ collapseCells([0,2,04], 'left')
-console.log "collapseCells"+ collapseCells([0,2,0,4] 'right')
-  $('body').keydown(e) ->
+  collapseCells=(cells, direction) ->
+    console.log "collapseCells"+ collapseCells([0,2,04], 'left')
+    console.log "collapseCells"+ collapseCells([0,2,0,4] 'right')
+    $('body').keydown(e) ->
     console.log e.which
     key=e.which
     key= [37..40]
