@@ -1,4 +1,3 @@
-console.log
 
 $ ->
 
@@ -144,6 +143,7 @@ $ ->
     [b[0][c],b[1][c],b[2][c],b[3][c]] = column
 
   move = (board, direction) ->
+    move()
    switch direction
     when 'right'
       for i in [0..3]
@@ -156,7 +156,7 @@ $ ->
         row = getColumn(i, board)
         row = mergeCells(row, 'left')
         row = collapseCells(row,'left')
-        setRow(row, i, board)
+        getColumn(row, i, board)
 
 
 
