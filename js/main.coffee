@@ -143,7 +143,7 @@ $ ->
     [b[0][c],b[1][c],b[2][c],b[3][c]] = column
 
   move = (board, direction) ->
-    move()
+
    switch direction
     when 'right'
       for i in [0..3]
@@ -157,6 +157,12 @@ $ ->
         row = mergeCells(row, 'left')
         row = collapseCells(row,'left')
         getColumn(row, i, board)
+
+  showboard = (board) ->
+    for i in [3..0]
+      for j in [0..3]
+        console.log(i)
+
 
 
 
