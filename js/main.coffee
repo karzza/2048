@@ -99,16 +99,23 @@ $ ->
         for x in [3...0]
           for y in [x-1..0]
             if newArray[x] == 0 then break
-            if newArray[x] == newArray[y]
+            else if newArray[x] == newArray[y]
               newArray[x]= newArray[x]* 2
               newArray[y]=0
-
-
-
-      if newArray[i] == newArray[i-1]
-        newArray[i] *= 2
-        newArray[i-1] = 0
-    newArray = newArray.filter(-> )
+              break
+            else if newArray[y] != 0
+              break
+      when 'down', 'left'
+        for x in [3..0]
+          for y in [x-1..0]
+            if newArray[x] == 0 then break
+          else if newArray[x] == newArray[y]
+          newArray[x]= newArray[x]*2
+          newArray[y]= 0
+          break
+        else in newArray[y] !=0
+         break
+    newArray
 
 
   console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
