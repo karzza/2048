@@ -82,7 +82,10 @@ $ ->
 
       switch key
         when 37 # left
+
           console.log 'left'
+          move(@board, 'left')
+          ppArray(@board)
         when 38
           console.log 'up'
         when 39
@@ -121,6 +124,8 @@ $ ->
   getRow = (rowNumber, board) ->
     board[rowNumber]
 
+
+
   getColumn = (columnNumber, board) ->
     column = []
     for row in [0..3]
@@ -132,6 +137,20 @@ $ ->
     board[rowNumber] = row
 
   ppArray(setRow([1,1,1,1], 0,@board))
+
+  setColumn = (column, columnNumber, board) ->
+    c= columnNumber
+    b= board
+      [b[8][c]],
+
+  move = (board, direction) ->
+     switch direction
+      when 'left'
+        for i in [0..3]
+          row = getRow(i, board)
+          row = mergeCells(row, 'left')
+          row = collapseCells(row, 'left')
+          setRow(row, i, board)
 
 
 
