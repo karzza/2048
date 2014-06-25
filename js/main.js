@@ -56,45 +56,7 @@
       }
       return true;
     };
-    getColumn = function(board, column) {
-      var cells, row, _i, _len, _ref;
-      cells = [];
-      _ref = [0.3];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        row = _ref[_i];
-        cells.push(board[row][column]);
-      }
-      return cells;
-    };
     collapseCells = function(cells, direction) {};
-    $('body').keydown((function(_this) {
-      return function(e) {
-        var key, keys;
-        console.log(e.which);
-        key = e.which;
-        keys = [37, 38, 39, 40];
-        if ($.inArray(key, keys) > -1) {
-          e.preventDefault();
-        }
-        switch (key) {
-          case 37:
-            console.log('left');
-            ppArray(_this.board);
-            move(_this.board, 'left');
-            break;
-          case 38:
-            console.log('up');
-            break;
-          case 39:
-            console.log('right');
-            break;
-          case 40:
-            console.log('down');
-        }
-        generateTile(_this.board);
-        return ppArray(_this.board);
-      };
-    })(this));
     mergeCells = function(arrayToMerge, direction) {
       var newArray, x, y, _i, _j, _k, _l, _ref, _ref1;
       newArray = arrayToMerge;
@@ -171,9 +133,12 @@
           _results1 = [];
           for (i = _j = 3; _j >= 0; i = --_j) {
             row = getColumn(i, board);
+            console.log('1', row);
             row = mergeCells(row, 'left');
+            console.log('2', row);
             row = collapseCells(row, 'left');
-            _results1.push(getColumn(row, i, board));
+            console.log('3', row);
+            _results1.push(setColumn(row, i, board));
           }
           return _results1;
       }
@@ -193,7 +158,31 @@
       }
       return _results;
     };
+    $('body').keydown((function(_this) {
+      return function(e) {
+        var key, keys;
+        console.log(e.which);
+        key = e.which;
+        keys = [37, 38, 39, 40];
+        if ($.inArray(key, keys) > -1) {
+          e.preventDefault();
+        }
+        switch (key) {
+          case 37:
+            console.log('left');
+            ppArray(_this.board);
+            return move(_this.board, 'left');
+          case 38:
+            return console.log('up');
+          case 39:
+            return console.log('right');
+          case 40:
+            return console.log('down');
+        }
+      };
+    })(this));
     generateTile(this.board);
+    ppArray(this.board);
     return ppArray(this.board);
   });
 

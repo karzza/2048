@@ -58,40 +58,10 @@ $ ->
           return false
     true
 
-  getColumn = (board, column) ->
-    # return an array
-    cells=[]
-    for row in [0.3]
-      cells.push board[row][column]
-    cells # => [2,2,0,0]
-
   collapseCells=(cells, direction) ->
 
   # console.log "collapseCells"+ collapseCells([0,2,0,4], 'left')
   # console.log "collapseCells"+ collapseCells([0,2,0,4], 'right')
-
-  $('body').keydown (e) =>
-    console.log e.which
-    key=e.which
-    keys= [37..40]
-
-    if $.inArray(key,keys)> -1
-      e.preventDefault()
-
-    switch key
-      when 37 # left
-        console.log 'left'
-        ppArray(@board)
-        move(@board, 'left')
-      when 38
-        console.log 'up'
-      when 39
-        console.log 'right'
-      when 40
-        console.log 'down'
-
-    generateTile(@board)
-    ppArray(@board)
 
   mergeCells = (arrayToMerge, direction) ->
     newArray = arrayToMerge
@@ -152,9 +122,12 @@ $ ->
       when 'left'
         for i in [3..0]
           row = getColumn(i, board)
+          console.log '1', row
           row = mergeCells(row, 'left')
+          console.log '2', row
           row = collapseCells(row,'left')
-          getColumn(row, i, board)
+          console.log '3', row
+          setColumn(row, i, board)
 
   showboard = (board) ->
     for i in [3..0]
@@ -162,13 +135,36 @@ $ ->
         console.log(i)
 
 
+  $('body').keydown (e) =>
+    console.log e.which
+    key=e.which
+    keys= [37..40]
+
+    if $.inArray(key,keys)> -1
+      e.preventDefault()
+
+    switch key
+      when 37 # left
+        console.log 'left'
+        ppArray(@board)
+        move(@board, 'left')
+      when 38
+        console.log 'up'
+      when 39
+        console.log 'right'
+      when 40
+        console.log 'down'
+
+  generateTile(@board)
+  ppArray(@board)
+
 
 
   # console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
   # console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
   # console.log "mergeCells " + mergeCells([2,2,4,2]) #=> 0,4,4,2
   # console.log "mergeCells " + mergeCells([4,2,2,2]) #=> 4,2,0,4
-  generateTile(@board)
+  # generateTile(@board)
   ppArray(@board)
 
 
