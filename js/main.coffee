@@ -92,10 +92,17 @@ $ ->
     generateTitle(@board)
     ppArray(@board)
 
-  mergeCells = (arrayToMerge) ->
+  mergeCells = (arrayToMerge, direction) ->
     newArray = arrayToMerge
-    for x in [3...0]
-      for y in [x-1..0]
+    switch direction
+      when 'up', 'right'
+        for x in [3...0]
+          for y in [x-1..0]
+            if newArray[x] == 0 then break
+            if newArray[x] == newArray[y]
+              newArray[x]= newArray[x]* 2
+              newArray[y]=0
+
 
 
       if newArray[i] == newArray[i-1]
