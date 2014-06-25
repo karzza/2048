@@ -4,8 +4,8 @@ $ ->
   ppArray = (array) ->
     for row in array
       console.log row
+
   @board = [0..3].map (x) -> [0..3].map (y) ->0
-  ppArray(@board)
 
   array1 =[0..3]
 
@@ -15,43 +15,41 @@ $ ->
 
   array4= [0..3]
 
-  masterArray = ->
-    x = array1 + array2 + array3 + array4
+  # masterArray = ->
+  #   x = array1 + array2 + array3 + array4
 
-  masterArray()
+  # masterArray()
 
-  board=[]
-  for x in [0..3]
-    board[x]= []
-    for y in [0..3]
-      board[x][y]=0
+  # board=[]
+  # for x in [0..3]
+  #   board[x]= []
+  #   for y in [0..3]
+  #     board[x][y]=0
 
-  ppArray board
+  # ppArray board
 
   generateTile= (board) ->
     unless boardFull(board)
-      val= getRandomCell()
-      [x,y]=getRandomCell()
+      val = randomValue()
+      [x,y] = getRandomCellIndices()
       if board[x][y]=0
         board[x][y]=val
       else
-        generateTitle(board)
+        generateTile(board)
 
 
-
+  # Return any value from 0 to 3
   randomIndex= (x) ->
     Math.floor(Math.random()* x)
 
-    for i in [0..1000]
-      console.log randomIndex()
-
+  # Return any value of 2 or 4
   randomValue = ->
     values =[2, 2, 2, 4]
-    val = values[randomIndex(values.length)* 3]
-    console.log randomValues
+    values[randomIndex(values.length)]
 
-  console.log ppArray(@board)
-
+  # Return random coordinate
+  getRandomCellIndices = ->
+    [randomIndex(4), randomIndex(4)]
 
   boardFull= (board)->
     for row in board
@@ -69,8 +67,8 @@ $ ->
 
   collapseCells=(cells, direction) ->
 
-  console.log "collapseCells"+ collapseCells([0,2,0,4], 'left')
-  console.log "collapseCells"+ collapseCells([0,2,0,4], 'right')
+  # console.log "collapseCells"+ collapseCells([0,2,0,4], 'left')
+  # console.log "collapseCells"+ collapseCells([0,2,0,4], 'right')
 
   $('body').keydown (e) =>
     console.log e.which
@@ -83,8 +81,8 @@ $ ->
     switch key
       when 37 # left
         console.log 'left'
-        move(@board, 'left')
         ppArray(@board)
+        move(@board, 'left')
       when 38
         console.log 'up'
       when 39
@@ -135,7 +133,7 @@ $ ->
     row = board[rowNumber]
     board[rowNumber] = row
 
-  ppArray(setRow([1,1,1,1], 0,@board))
+  # ppArray(setRow([1,1,1,1], 0,@board))
 
   setColumn = (column, columnNumber, board) ->
     c= columnNumber
@@ -144,19 +142,19 @@ $ ->
 
   move = (board, direction) ->
 
-   switch direction
-    when 'right'
-      for i in [0..3]
-        row = getRow(i, board)
-        row = mergeCells(row, 'right')
-        row = collapseCells(row,'right')
-        setRow(row, i, board)
-    when 'left'
-      for i in [3..0]
-        row = getColumn(i, board)
-        row = mergeCells(row, 'left')
-        row = collapseCells(row,'left')
-        getColumn(row, i, board)
+    switch direction
+      when 'right'
+        for i in [0..3]
+          row = getRow(i, board)
+          row = mergeCells(row, 'right')
+          row = collapseCells(row,'right')
+          setRow(row, i, board)
+      when 'left'
+        for i in [3..0]
+          row = getColumn(i, board)
+          row = mergeCells(row, 'left')
+          row = collapseCells(row,'left')
+          getColumn(row, i, board)
 
   showboard = (board) ->
     for i in [3..0]
@@ -166,10 +164,12 @@ $ ->
 
 
 
-  console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
-  console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
-  console.log "mergeCells " + mergeCells([2,2,4,2]) #=> 0,4,4,2
-  console.log "mergeCells " + mergeCells([4,2,2,2]) #=> 4,2,0,4
+  # console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
+  # console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
+  # console.log "mergeCells " + mergeCells([2,2,4,2]) #=> 0,4,4,2
+  # console.log "mergeCells " + mergeCells([4,2,2,2]) #=> 4,2,0,4
+  generateTile(@board)
+  ppArray(@board)
 
 
 
