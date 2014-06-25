@@ -79,20 +79,19 @@ $ ->
     if $.inArray(key,keys)> -1
       e.preventDefault()
 
+    switch key
+      when 37 # left
+        console.log 'left'
+        move(@board, 'left')
+        ppArray(@board)
+      when 38
+        console.log 'up'
+      when 39
+        console.log 'right'
+      when 40
+        console.log 'down'
 
-      switch key
-        when 37 # left
-          console.log 'left'
-          move(@board, 'left')
-          ppArray(@board)
-        when 38
-          console.log 'up'
-        when 39
-          console.log 'right'
-        when 40
-          console.log 'down'
-
-    generateTitle(@board)
+    generateTile(@board)
     ppArray(@board)
 
   mergeCells = (arrayToMerge, direction) ->
@@ -140,18 +139,22 @@ $ ->
   setColumn = (column, columnNumber, board) ->
     c= columnNumber
     b= board
-      [b[8][c][]],
+    [b[0][c],b[1][c],b[2][c],b[3][c]] = column
 
   move = (board, direction) ->
-     switch direction
-      when 'right'
-        for i in [0..3]
-          row = getRow(i, board)
-          row = mergeCells(row, 'right')
-          row = collapseCells(row,'right')
-          setRow(row, i, board)
-      when 'down'
-        for i in [0..3]
+   switch direction
+    when 'right'
+      for i in [0..3]
+        row = getRow(i, board)
+        row = mergeCells(row, 'right')
+        row = collapseCells(row,'right')
+        setRow(row, i, board)
+    when 'left'
+      for i in [3..0]
+        row = getRow(i, board)
+        row = mergeCells(row, 'left')
+        row = collapseCells(row,'left')
+        setRow(row, i, board)
 
 
 
