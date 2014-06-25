@@ -117,6 +117,18 @@ $ ->
               break
     newArray
 
+  getRow = (rowNumber, board) ->
+    board[rowNumber]
+
+  getColumn = (columnNumber, board) ->
+    column = []
+    for row in [0..3]
+      column.push board[row][columnNumber]
+    column
+
+  setRow = (row, rowNumber, board) ->
+
+
 
 
 
