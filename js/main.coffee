@@ -140,16 +140,18 @@ $ ->
   setColumn = (column, columnNumber, board) ->
     c= columnNumber
     b= board
-      [b[8][c]],
+      [b[8][c][]],
 
   move = (board, direction) ->
      switch direction
-      when 'left'
+      when 'right'
         for i in [0..3]
           row = getRow(i, board)
-          row = mergeCells(row, 'left')
-          row = collapseCells(row, 'left')
+          row = mergeCells(row, 'right')
+          row = collapseCells(row,'right')
           setRow(row, i, board)
+      when 'down'
+        for i in [0..3]
 
 
 
