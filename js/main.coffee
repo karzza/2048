@@ -74,10 +74,11 @@ $ ->
   $('body').keydown (e) ->
     console.log e.which
     key=e.which
-    key= [37..40]
+    keys= [37..40]
 
     if $.inArray(key,keys)> -1
       e.preventDefault()
+
 
       switch key
         when 37 # left
@@ -127,6 +128,8 @@ $ ->
     column
 
   setRow = (row, rowNumber, board) ->
+    row = board[rowNumber]
+    board[rowNumber] = row
 
   ppArray(setRow([1,1,1,1]0, @board))
 
