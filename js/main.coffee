@@ -71,7 +71,7 @@ $ ->
   console.log "collapseCells"+ collapseCells([0,2,0,4], 'left')
   console.log "collapseCells"+ collapseCells([0,2,0,4], 'right')
 
-  $('body').keydown (e) ->
+  $('body').keydown (e) =>
     console.log e.which
     key=e.which
     keys= [37..40]
@@ -82,7 +82,6 @@ $ ->
 
       switch key
         when 37 # left
-
           console.log 'left'
           move(@board, 'left')
           ppArray(@board)
