@@ -94,11 +94,15 @@ $ ->
 
   mergeCells = (arrayToMerge) ->
     newArray = arrayToMerge
-    for i in [3...0]
+    for x in [3...0]
+      for y in [x-1..0]
+
+
       if newArray[i] == newArray[i-1]
         newArray[i] *= 2
         newArray[i-1] = 0
-    newArray = newArray.filter(0)
+    newArray = newArray.filter(-> )
+
 
   console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
   console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
