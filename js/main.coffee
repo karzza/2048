@@ -128,6 +128,8 @@ $ ->
 
   setRow = (row, rowNumber, board) ->
 
+  ppArray(setRow([1,1,1,1]0, @board))
+
 
 
 
