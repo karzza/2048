@@ -109,13 +109,13 @@ $ ->
         for x in [0...3]
           for y in [x+1..3]
             if newArray[x] == 0 then break
-          else if newArray[x] == newArray[y]
-          newArray[x]= newArray[x]*2
-          newArray[y]= 0
-          break
-        else in newArray[y] !=0
-         break
-    newArray
+            else if newArray[x] == newArray[y]
+            newArray[x]= newArray[x]*2
+            newArray[y]= 0
+            break
+              else in newArray[y] !=0
+              break
+              newArray
 
 
   console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
