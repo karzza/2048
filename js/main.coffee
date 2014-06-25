@@ -1,3 +1,5 @@
+console.log
+
 $ ->
 
   ppArray = (array) ->
@@ -151,12 +153,10 @@ $ ->
         setRow(row, i, board)
     when 'left'
       for i in [3..0]
-        row = getRow(i, board)
+        row = getColumn(i, board)
         row = mergeCells(row, 'left')
         row = collapseCells(row,'left')
         setRow(row, i, board)
-
-
 
 
 
