@@ -27,15 +27,14 @@ $ ->
 
   ppArray board
 
-  generateTitle= (board) ->
+  generateTile= (board) ->
     unless boardFull(board)
       val= getRandomCell()
       [x,y]=getRandomCell()
-        if board[x][y]=0
-          board[x][y]=val
-          else
-            generateTitle(board)
-          console.log generateTile(@board)
+      if board[x][y]=0
+        board[x][y]=val
+      else
+        generateTitle(board)
 
 
 
@@ -63,14 +62,16 @@ $ ->
   getColumn = (board, column) ->
     # return an array
     cells=[]
-    for row in [0.,3]
+    for row in [0.3]
       cells.push board[row][column]
     cells # => [2,2,0,0]
 
   collapseCells=(cells, direction) ->
-    console.log "collapseCells"+ collapseCells([0,2,04], 'left')
-    console.log "collapseCells"+ collapseCells([0,2,0,4] 'right')
-    $('body').keydown(e) ->
+
+  console.log "collapseCells"+ collapseCells([0,2,0,4], 'left')
+  console.log "collapseCells"+ collapseCells([0,2,0,4], 'right')
+
+  $('body').keydown (e) ->
     console.log e.which
     key=e.which
     key= [37..40]
@@ -91,20 +92,25 @@ $ ->
     generateTitle(@board)
     ppArray(@board)
 
-merge = (arrayToMerge) ->
-  newArray = arrayToMerge
-  for value, index in array1
-    i =[0..3]
-  for [i] < in index
-    if value[i] == value[i+1]
-      value[i+1] = value[i+1] *2
-      value[i] = 0
-  newArray
+  mergeCells = (arrayToMerge) ->
+    newArray = arrayToMerge
+    for i in [3...0]
+      if newArray[i] == newArray[i-1]
+        newArray[i] *= 2
+        newArray[i-1] = 0
+    newArray = newArray.filter(0)
 
-  console.log "mergeCells" + mergeCells([2,2,2,2], 'left')
-  console.log "mergeCells" + mergeCells([2,2,2,2], 'right')
-  console.log "mergeCells" + mergeCells([2,2,2,2], 'left')
-  console.log "mergeCells" + mergeCells([2,2,2,2], 'up')
+  console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
+  console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
+  console.log "mergeCells " + mergeCells([2,2,4,2]) #=> 0,4,4,2
+  console.log "mergeCells " + mergeCells([4,2,2,2]) #=> 4,2,0,4
+
+
+
+
+
+
+
 
 
 
