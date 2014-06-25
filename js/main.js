@@ -112,16 +112,43 @@
       generateTitle(this.board);
       return ppArray(this.board);
     });
-    mergeCells = function(arrayToMerge) {
-      var i, newArray, _k;
+    mergeCells = function(arrayToMerge, direction) {
+      var newArray, _k, _l, _m, _n, _ref, _ref1;
       newArray = arrayToMerge;
-      for (i = _k = 3; _k > 0; i = --_k) {
-        if (newArray[i] === newArray[i - 1]) {
-          newArray[i] *= 2;
-          newArray[i - 1] = 0;
-        }
+      switch (direction) {
+        case 'up':
+        case 'right':
+          for (x = _k = 3; _k > 0; x = --_k) {
+            for (y = _l = _ref = x - 1; _ref <= 0 ? _l <= 0 : _l >= 0; y = _ref <= 0 ? ++_l : --_l) {
+              if (newArray[x] === 0) {
+                break;
+              } else if (newArray[x] === newArray[y]) {
+                newArray[x] = newArray[x] * 2;
+                newArray[y] = 0;
+                break;
+              } else if (newArray[y] !== 0) {
+                break;
+              }
+            }
+          }
+          break;
+        case 'down':
+        case 'left':
+          for (x = _m = 0; _m < 3; x = ++_m) {
+            for (y = _n = _ref1 = x + 1; _ref1 <= 3 ? _n <= 3 : _n >= 3; y = _ref1 <= 3 ? ++_n : --_n) {
+              if (newArray[x] === 0) {
+                break;
+              } else if (newArray[x] === newArray[y]) {
+                newArray[x] = newArray[x] * 2;
+                newArray[y] = 0;
+                break;
+              } else if (newArray[y] !== 0) {
+                break;
+              }
+            }
+          }
       }
-      return newArray = newArray.filter(0);
+      return newArray;
     };
     console.log("mergeCells " + mergeCells([2, 2, 2, 2]));
     console.log("mergeCells " + mergeCells([2, 2, 2, 2]));

@@ -112,10 +112,12 @@ $ ->
             else if newArray[x] == newArray[y]
               newArray[x]= newArray[x]*2
               newArray[y]= 0
-            break
-              else in newArray[y] !=0
               break
-              newArray
+            else if newArray[y] !=0
+              break
+    newArray
+
+
 
 
   console.log "mergeCells " + mergeCells([2,2,2,2]) #=> 0,4,0,4
