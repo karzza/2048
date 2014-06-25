@@ -131,7 +131,7 @@ $ ->
     row = board[rowNumber]
     board[rowNumber] = row
 
-  ppArray(setRow([1,1,1,1]0, @board))
+  ppArray(setRow([1,1,1,1], 0,@board))
 
 
 

@@ -89,10 +89,10 @@
     console.log("collapseCells" + collapseCells([0, 2, 0, 4], 'left'));
     console.log("collapseCells" + collapseCells([0, 2, 0, 4], 'right'));
     $('body').keydown(function(e) {
-      var key;
+      var key, keys;
       console.log(e.which);
       key = e.which;
-      key = [37, 38, 39, 40];
+      keys = [37, 38, 39, 40];
       if ($.inArray(key, keys) > -1) {
         e.preventDefault();
         switch (key) {
@@ -161,7 +161,11 @@
       }
       return column;
     };
-    setRow = function(row, rowNumber, board) {};
+    setRow = function(row, rowNumber, board) {
+      row = board[rowNumber];
+      return board[rowNumber] = row;
+    };
+    ppArray(setRow([1, 1, 1, 1], 0, this.board));
     console.log("mergeCells " + mergeCells([2, 2, 2, 2]));
     console.log("mergeCells " + mergeCells([2, 2, 2, 2]));
     console.log("mergeCells " + mergeCells([2, 2, 4, 2]));
