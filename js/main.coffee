@@ -51,6 +51,13 @@ $ ->
   getRandomCellIndices = ->
     [randomIndex(4), randomIndex(4)]
 
+  #arrayEqual = (a,b) ->
+    #for val, i in a
+    #console.log val, i
+    #console.log "val of b:" + val = i[b]
+    #if val, j in b = val i in a
+      #return true or false
+
   boardFull= (board)->
     for row in board
       for cell in row
@@ -110,7 +117,7 @@ $ ->
     column
 
   setRow = (row, rowNumber, board) ->
-    row = board[rowNumber]
+    # row = board[rowNumber]
     board[rowNumber] = row
 
   # ppArray(setRow([1,1,1,1], 0,@board))
@@ -130,19 +137,27 @@ $ ->
           row = collapseCells(row,'right')
           setRow(row, i, board)
       when 'left'
-        for i in [3..0]
-          row = getColumn(i, board)
+        for i in [0..3]
+          row = getRow(i, board)
+          console.log 'getRow  : ', i, ': ', row
           row = mergeCells(row, 'left')
+          console.log 'merge   : ', i, ': ', row
           row = collapseCells(row,'left')
-          setColumn(row, i, board)
+          console.log 'collapse: ', i, ': ', row
+          setRow(row, i, board)
+          console.log 'setRow  : ', i, ': ', row
 
-    generateTile
+    generateTile(board)
+    showboard(board)
 
   showboard = (board) ->
     for i in [3..0]
       for j in [0..3]
         c = board[i][j]
-        $(".r#{i}.c#{j}>div").html(c)
+        if c is 0
+          $(".r#{i}.c#{j}>div").html('')
+        else
+          $(".r#{i}.c#{j}>div").html(c)
 
 
 
@@ -162,14 +177,19 @@ $ ->
         ppArray(@board)
       when 38
         console.log 'up'
+        move(@board, 'up')
       when 39
         console.log 'right'
+        move(@board, 'right')
       when 40
         console.log 'down'
+        move(@board,'down')
 
   generateTile(@board)
   generateTile(@board)
   ppArray(@board)
+  showboard(@board)
+
 
 
 

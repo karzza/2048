@@ -129,7 +129,6 @@
       return column;
     };
     setRow = function(row, rowNumber, board) {
-      row = board[rowNumber];
       return board[rowNumber] = row;
     };
     setColumn = function(column, columnNumber, board) {
@@ -150,14 +149,19 @@
           }
           break;
         case 'left':
-          for (i = _j = 3; _j >= 0; i = --_j) {
-            row = getColumn(i, board);
+          for (i = _j = 0; _j <= 3; i = ++_j) {
+            row = getRow(i, board);
+            console.log('getRow  : ', i, ': ', row);
             row = mergeCells(row, 'left');
+            console.log('merge   : ', i, ': ', row);
             row = collapseCells(row, 'left');
-            setColumn(row, i, board);
+            console.log('collapse: ', i, ': ', row);
+            setRow(row, i, board);
+            console.log('setRow  : ', i, ': ', row);
           }
       }
-      return generateTile;
+      generateTile(board);
+      return showboard(board);
     };
     showboard = function(board) {
       var c, i, j, _i, _results;
@@ -168,7 +172,11 @@
           _results1 = [];
           for (j = _j = 0; _j <= 3; j = ++_j) {
             c = board[i][j];
-            _results1.push($(".r" + i + ".c" + j + ">div").html(c));
+            if (c === 0) {
+              _results1.push($(".r" + i + ".c" + j + ">div").html(''));
+            } else {
+              _results1.push($(".r" + i + ".c" + j + ">div").html(c));
+            }
           }
           return _results1;
         })());
@@ -189,17 +197,21 @@
             move(_this.board, 'left');
             return ppArray(_this.board);
           case 38:
-            return console.log('up');
+            console.log('up');
+            return move(_this.board, 'up');
           case 39:
-            return console.log('right');
+            console.log('right');
+            return move(_this.board, 'right');
           case 40:
-            return console.log('down');
+            console.log('down');
+            return move(_this.board, 'down');
         }
       };
     })(this));
     generateTile(this.board);
     generateTile(this.board);
-    return ppArray(this.board);
+    ppArray(this.board);
+    return showboard(this.board);
   });
 
 }).call(this);
