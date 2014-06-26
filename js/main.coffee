@@ -32,7 +32,7 @@ $ ->
     unless boardFull(board)
       val = randomValue()
       [x,y] = getRandomCellIndices()
-      if board[x][y]=0
+      if board[x][y] == 0
         board[x][y]=val
       else
         generateTile(board)
@@ -59,6 +59,16 @@ $ ->
     true
 
   collapseCells=(cells, direction) ->
+    cells = cells.filter (x) -> x != 0
+    padding = 4 - cells.length
+
+    for i in [0...padding]
+      switch direction
+        when 'right' then cells.unshift 0
+        when 'left' then cells.push 0
+        when 'down' then cells.unshift 0
+        when 'up' then cells.push 0
+    cells
 
   # console.log "collapseCells"+ collapseCells([0,2,0,4], 'left')
   # console.log "collapseCells"+ collapseCells([0,2,0,4], 'right')
@@ -122,21 +132,19 @@ $ ->
       when 'left'
         for i in [3..0]
           row = getColumn(i, board)
-          console.log '1', row
           row = mergeCells(row, 'left')
-          console.log '2', row
           row = collapseCells(row,'left')
-          console.log '3', row
           setColumn(row, i, board)
 
   showboard = (board) ->
     for i in [3..0]
       for j in [0..3]
+        c = board[i][j]
         console.log(i)
 
 
+
   $('body').keydown (e) =>
-    console.log e.which
     key=e.which
     keys= [37..40]
 
@@ -146,8 +154,8 @@ $ ->
     switch key
       when 37 # left
         console.log 'left'
-        ppArray(@board)
         move(@board, 'left')
+        ppArray(@board)
       when 38
         console.log 'up'
       when 39
@@ -155,6 +163,7 @@ $ ->
       when 40
         console.log 'down'
 
+  generateTile(@board)
   generateTile(@board)
   ppArray(@board)
 
@@ -165,7 +174,7 @@ $ ->
   # console.log "mergeCells " + mergeCells([2,2,4,2]) #=> 0,4,4,2
   # console.log "mergeCells " + mergeCells([4,2,2,2]) #=> 4,2,0,4
   # generateTile(@board)
-  ppArray(@board)
+  # ppArray(@board)
 
 
 

@@ -25,7 +25,7 @@
       if (!boardFull(board)) {
         val = randomValue();
         _ref =  getRandomCellIndices(), x = _ref[0], y = _ref[1];
-        if (board[x][y] = 0) {
+        if (board[x][y] === 0) {
           return board[x][y] = val;
         } else {
           return generateTile(board);
@@ -56,7 +56,29 @@
       }
       return true;
     };
-    collapseCells = function(cells, direction) {};
+    collapseCells = function(cells, direction) {
+      var i, padding, _i;
+      cells = cells.filter(function(x) {
+        return x !== 0;
+      });
+      padding = 4 - cells.length;
+      for (i = _i = 0; 0 <= padding ? _i < padding : _i > padding; i = 0 <= padding ? ++_i : --_i) {
+        switch (direction) {
+          case 'right':
+            cells.unshift(0);
+            break;
+          case 'left':
+            cells.push(0);
+            break;
+          case 'down':
+            cells.unshift(0);
+            break;
+          case 'up':
+            cells.push(0);
+        }
+      }
+      return cells;
+    };
     mergeCells = function(arrayToMerge, direction) {
       var newArray, x, y, _i, _j, _k, _l, _ref, _ref1;
       newArray = arrayToMerge;
@@ -133,24 +155,22 @@
           _results1 = [];
           for (i = _j = 3; _j >= 0; i = --_j) {
             row = getColumn(i, board);
-            console.log('1', row);
             row = mergeCells(row, 'left');
-            console.log('2', row);
             row = collapseCells(row, 'left');
-            console.log('3', row);
             _results1.push(setColumn(row, i, board));
           }
           return _results1;
       }
     };
     showboard = function(board) {
-      var i, j, _i, _results;
+      var c, i, j, _i, _results;
       _results = [];
       for (i = _i = 3; _i >= 0; i = --_i) {
         _results.push((function() {
           var _j, _results1;
           _results1 = [];
           for (j = _j = 0; _j <= 3; j = ++_j) {
+            c = board[i][j];
             _results1.push(console.log(i));
           }
           return _results1;
@@ -161,7 +181,6 @@
     $('body').keydown((function(_this) {
       return function(e) {
         var key, keys;
-        console.log(e.which);
         key = e.which;
         keys = [37, 38, 39, 40];
         if ($.inArray(key, keys) > -1) {
@@ -170,8 +189,8 @@
         switch (key) {
           case 37:
             console.log('left');
-            ppArray(_this.board);
-            return move(_this.board, 'left');
+            move(_this.board, 'left');
+            return ppArray(_this.board);
           case 38:
             return console.log('up');
           case 39:
@@ -182,7 +201,7 @@
       };
     })(this));
     generateTile(this.board);
-    ppArray(this.board);
+    generateTile(this.board);
     return ppArray(this.board);
   });
 
