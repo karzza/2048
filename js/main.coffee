@@ -1,9 +1,13 @@
 
 $ ->
+  WinningTileValue = 2048
+
 
   ppArray = (array) ->
     for row in array
       console.log row
+
+  @board = buildBoard()
 
   @board = [0..3].map (x) -> [0..3].map (y) ->0
 
@@ -51,12 +55,31 @@ $ ->
   getRandomCellIndices = ->
     [randomIndex(4), randomIndex(4)]
 
-  #arrayEqual = (a,b) ->
-    #for val, i in a
-    #console.log val, i
-    #console.log "val of b:" + val = i[b]
-    #if val, j in b = val i in a
-      #return true or false
+  arrayEqual = (a,b) ->
+    for val, i in a
+    console.log val, i
+    console.log "val of b:" + val = i[b]
+    if val, j in b = val i in a
+      return false
+    true
+
+  boardEqual = (a,b) ->
+    for row, i in a
+      unlessarrayEqual(row, b[i])
+        return false
+    true
+
+    a = [[0,0],[0,0]]
+    b = [[0,0],[0,0]]
+    c = [[0,0],[0,1]]
+
+  moveIsValid = (a, b ) ->
+      not boardEqual(a, b)
+
+  noValidMoves = (board) ->
+
+
+
 
   boardFull= (board)->
     for row in board
@@ -106,10 +129,10 @@ $ ->
     newArray
 
   getRow = (rowNumber, board) ->
-    board[rowNumber]
+    [r,b] = [rowNumber, board]
+    [b[r][0],b[r][1], b[r][2], b[r][3]]
 
-
-
+    #board[rowNumber]
   getColumn = (columnNumber, board) ->
     column = []
     for row in [0..3]
@@ -129,14 +152,15 @@ $ ->
 
   move = (board, direction) ->
 
+    newboard = buildBoard()
+
     switch direction
-      when 'right'
+      when 'left' 'right'
         for i in [0..3]
-          row = getRow(i, board)
-          row = mergeCells(row, 'right')
-          row = collapseCells(row,'right')
+          row = mergeCells(getRow(i, board),direction)
+          row = collapseCells(row, direction )
           setRow(row, i, board)
-      when 'left'
+      when 'up' 'down'
         for i in [0..3]
           row = getRow(i, board)
           console.log 'getRow  : ', i, ': ', row
@@ -185,10 +209,22 @@ $ ->
         console.log 'down'
         move(@board,'down')
 
+  newBoard = move(@board, direction)
+    if moveIsValid(newBoard,@board)
+      @board = newBoard
+      generateTile(@board)
+      showBoard(@board)
+    if gameLost(@board)
+     console.log "Game Over!!"
+    else if gameWon(@board)
+      console.log "Victory!!"
+
+
   generateTile(@board)
   generateTile(@board)
   ppArray(@board)
   showboard(@board)
+  @board = buildBoard()
 
 
 
