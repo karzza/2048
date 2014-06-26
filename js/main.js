@@ -171,7 +171,7 @@
           _results1 = [];
           for (j = _j = 0; _j <= 3; j = ++_j) {
             c = board[i][j];
-            _results1.push(console.log(i));
+            _results1.push($(".r" + i + ".c" + j + ">div").html(c));
           }
           return _results1;
         })());

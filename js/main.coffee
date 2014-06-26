@@ -140,7 +140,7 @@ $ ->
     for i in [3..0]
       for j in [0..3]
         c = board[i][j]
-        console.log(i)
+        $(".r#{i}.c#{j}>div").html(c)
 
 
 
