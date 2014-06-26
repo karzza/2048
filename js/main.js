@@ -139,28 +139,25 @@
       return b[0][c] = column[0], b[1][c] = column[1], b[2][c] = column[2], b[3][c] = column[3], column;
     };
     move = function(board, direction) {
-      var i, row, _i, _j, _results, _results1;
+      var i, row, _i, _j;
       switch (direction) {
         case 'right':
-          _results = [];
           for (i = _i = 0; _i <= 3; i = ++_i) {
             row = getRow(i, board);
             row = mergeCells(row, 'right');
             row = collapseCells(row, 'right');
-            _results.push(setRow(row, i, board));
+            setRow(row, i, board);
           }
-          return _results;
           break;
         case 'left':
-          _results1 = [];
           for (i = _j = 3; _j >= 0; i = --_j) {
             row = getColumn(i, board);
             row = mergeCells(row, 'left');
             row = collapseCells(row, 'left');
-            _results1.push(setColumn(row, i, board));
+            setColumn(row, i, board);
           }
-          return _results1;
       }
+      return generateTile;
     };
     showboard = function(board) {
       var c, i, j, _i, _results;
@@ -178,6 +175,7 @@
       }
       return _results;
     };
+    showBoard(this.board);
     $('body').keydown((function(_this) {
       return function(e) {
         var key, keys;

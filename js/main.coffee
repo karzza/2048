@@ -136,11 +136,15 @@ $ ->
           row = collapseCells(row,'left')
           setColumn(row, i, board)
 
+    generateTile
+
   showboard = (board) ->
     for i in [3..0]
       for j in [0..3]
         c = board[i][j]
         $(".r#{i}.c#{j}>div").html(c)
+
+  showBoard(@board)
 
 
 
