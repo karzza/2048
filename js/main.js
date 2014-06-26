@@ -175,7 +175,6 @@
       }
       return _results;
     };
-    showBoard(this.board);
     $('body').keydown((function(_this) {
       return function(e) {
         var key, keys;

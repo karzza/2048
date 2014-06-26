@@ -144,7 +144,7 @@ $ ->
         c = board[i][j]
         $(".r#{i}.c#{j}>div").html(c)
 
-  showBoard(@board)
+
 
 
 
