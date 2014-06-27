@@ -7,30 +7,11 @@ $ ->
     for row in array
       console.log row
 
-  @board = buildBoard()
 
-  @board = [0..3].map (x) -> [0..3].map (y) ->0
+  buildBoard = ->
+    [0..3].map -> [0..3].map -> 0
 
-  array1 =[0..3]
 
-  array2 =[0..3]
-
-  array3= [0..3]
-
-  array4= [0..3]
-
-  # masterArray = ->
-  #   x = array1 + array2 + array3 + array4
-
-  # masterArray()
-
-  # board=[]
-  # for x in [0..3]
-  #   board[x]= []
-  #   for y in [0..3]
-  #     board[x][y]=0
-
-  # ppArray board
 
   generateTile= (board) ->
     unless boardFull(board)
@@ -57,15 +38,15 @@ $ ->
 
   arrayEqual = (a,b) ->
     for val, i in a
-    console.log val, i
-    console.log "val of b:" + val = i[b]
-    if val, j in b = val i in a
-      return false
+      console.log val, i
+      console.log "val of b:" + val = i[b]
+      if val != b[i]
+        return false
     true
 
   boardEqual = (a,b) ->
     for row, i in a
-      unlessarrayEqual(row, b[i])
+      unless arrayEqual(row, b[i])
         return false
     true
 
@@ -155,12 +136,12 @@ $ ->
     newboard = buildBoard()
 
     switch direction
-      when 'left' 'right'
+      when 'left','right'
         for i in [0..3]
           row = mergeCells(getRow(i, board),direction)
           row = collapseCells(row, direction )
           setRow(row, i, board)
-      when 'up' 'down'
+      when 'up','down'
         for i in [0..3]
           row = getRow(i, board)
           console.log 'getRow  : ', i, ': ', row
@@ -209,7 +190,7 @@ $ ->
         console.log 'down'
         move(@board,'down')
 
-  newBoard = move(@board, direction)
+    newBoard = move(@board, direction)
     if moveIsValid(newBoard,@board)
       @board = newBoard
       generateTile(@board)
@@ -219,12 +200,12 @@ $ ->
     else if gameWon(@board)
       console.log "Victory!!"
 
+  @board = buildBoard()
 
   generateTile(@board)
   generateTile(@board)
   ppArray(@board)
   showboard(@board)
-  @board = buildBoard()
 
 
 
